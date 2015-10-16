@@ -7,6 +7,7 @@ group :test do
   gem 'shoulda'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'paperclip'
 end
 
 
