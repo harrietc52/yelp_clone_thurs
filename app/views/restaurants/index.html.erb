@@ -1,6 +1,5 @@
 <% if @restaurants.any? %>
   <% @restaurants.each do |restaurant| %>
-
     <%= link_to restaurant.name, restaurant_path(restaurant) %>
     Average rating: <%= star_rating(restaurant.average_rating) %>
 
@@ -21,6 +20,7 @@
     <% if restaurant.reviews.any? %>
       <ul>
         <% restaurant.reviews.each do |review| %>
+          <p><%= pluralize review.endorsements.count, 'endorsement' %></p>
           <li>
             <% if current_user %>
               <% if (review.user_id == current_user.id) %>
