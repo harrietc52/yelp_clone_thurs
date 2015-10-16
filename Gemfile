@@ -5,6 +5,8 @@ group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 
