@@ -2,7 +2,9 @@
   <% @restaurants.each do |restaurant| %>
 
     <%= link_to restaurant.name, restaurant_path(restaurant) %>
-    <% unless restaurant.reviews.map {|review| review.user_id}.include?(current_user.id) %>
+    <% if current_user %>
+      <% unless restaurant.reviews.map {|review| review.user_id}.include?(current_user.id) %>
+    <% end %>
       <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
     <% end %>
     <% if current_user %>

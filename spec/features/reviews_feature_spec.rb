@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'reviewing' do
 
   context 'user is signed in' do
+
     before do
       user = build :user
       sign_up(user)
@@ -72,9 +73,26 @@ feature 'reviewing' do
       click_button 'Leave Review'
       expect(page).to have_content 'Delete review'
     end
-    
+
     scenario 'displays an average rating for all reviews' do
+      visit '/restaurants'
+      click_link('Add a restaurant')
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      # click_link 'Review KFC'
+      # fill_in "Thoughts", with: "so so"
+      # select '3', from: 'Rating'
+      # click_button 'Leave Review'
       leave_review('So so', '3')
+      click_link 'Sign out'
+      user = build :user2
+      sign_up(user)
+      # click_link 'Review KFC'
+      # fill_in "Thoughts", with: "great"
+      # select '5', from: 'Rating'
+      # click_button 'Leave Review'
+      # fill_in 'Thoughts', with: thoughts
+      # select rating, from: 'Rating'
       leave_review('Great', '5')
       expect(page).to have_content('Average rating: 4')
     end
@@ -84,10 +102,8 @@ feature 'reviewing' do
 end
 
 def leave_review(thoughts, rating)
-  visit '/restaurants'
   click_link 'Review KFC'
   fill_in 'Thoughts', with: thoughts
   select rating, from: 'Rating'
   click_button 'Leave Review'
 end
-
